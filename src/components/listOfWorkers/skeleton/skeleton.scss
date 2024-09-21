@@ -1,0 +1,47 @@
+.skeleton {
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    height: 84px;
+    width: 100%;
+    margin: 16px;
+  }
+
+  &__img {
+    width: 72px;
+    height: 72px;
+    margin-right: 16px;
+    border-radius: 50%;
+  }
+
+  &__name {
+    width: 144px;
+    height: 16px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+  }
+
+  &__position {
+    width: 80px;
+    height: 12px;
+    margin-top: 20px;
+    border-radius: 50px;
+  }
+
+  &_animation {
+    background: linear-gradient(to left, #f9f9fb, #f6f6f9, #f4f4f6, #f7f7f8);
+    animation: animated 1s linear infinite;
+  }
+}
+
+@keyframes animated {
+  to {
+    background-position-x: 144px;
+  }
+}

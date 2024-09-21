@@ -1,0 +1,7 @@
+$lg: 1280px;
+
+@mixin for-large-up {
+  @media screen and (min-width: $lg) {
+    @content;
+  }
+}
