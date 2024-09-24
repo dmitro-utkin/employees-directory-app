@@ -8,13 +8,19 @@ interface HeaderProps {
   setActiveFilter: (filter: 'alphabet' | 'birthday') => void;
   setSearchQuery: (query: string) => void;
   activeFilter: 'alphabet' | 'birthday';
+  setSelectedCategory: (category: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ setActiveFilter, setSearchQuery, activeFilter }) => {
-  const [isFilterMenuVisible, setFilterMenuVisible] = useState<boolean>(false);
+const Header: React.FC<HeaderProps> = ({
+  setActiveFilter,
+  setSearchQuery,
+  activeFilter,
+  setSelectedCategory,
+}) => {
+  const [isFilterMenuVisible, setIsFilterMenuVisible] = useState<boolean>(false);
 
   const handleToggleFilterMenu = () => {
-    setFilterMenuVisible(prevState => !prevState);
+    setIsFilterMenuVisible(prevState => !prevState);
   };
 
   const handleFilterChange = (filter: 'alphabet' | 'birthday') => {
@@ -28,7 +34,6 @@ const Header: React.FC<HeaderProps> = ({ setActiveFilter, setSearchQuery, active
   return (
     <div className="header">
       <h1 className="header__title">Search</h1>
-
       <SearchForm
         onToggleFilterMenu={handleToggleFilterMenu}
         isFilterMenuVisible={isFilterMenuVisible}
@@ -42,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ setActiveFilter, setSearchQuery, active
           activeFilter={activeFilter}
         />
       )}
-      <Navigation />
+      <Navigation setSelectedCategory={setSelectedCategory} />
     </div>
   );
 };

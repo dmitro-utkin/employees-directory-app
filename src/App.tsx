@@ -6,6 +6,7 @@ import './index.scss';
 const App = () => {
   const [activeFilter, setActiveFilter] = useState<'alphabet' | 'birthday'>('alphabet');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   return (
     <div className="page">
@@ -13,8 +14,13 @@ const App = () => {
         setActiveFilter={setActiveFilter}
         setSearchQuery={setSearchQuery}
         activeFilter={activeFilter}
+        setSelectedCategory={setSelectedCategory}
       />
-      <ListOfWorkers activeFilter={activeFilter} searchQuery={searchQuery} />
+      <ListOfWorkers
+        activeFilter={activeFilter}
+        searchQuery={searchQuery}
+        selectedCategory={selectedCategory}
+      />
     </div>
   );
 };
