@@ -52,8 +52,6 @@ const ListOfWorkers: React.FC<ListOfWorkersProps> = ({
     return <ErrorPage />;
   }
 
-  console.log('Selected Category:', selectedCategory);
-
   const filteredWorkers = workers.filter(worker => {
     const searchQueryLower = searchQuery.toLowerCase();
     const matchesSearchQuery =
@@ -64,9 +62,6 @@ const ListOfWorkers: React.FC<ListOfWorkersProps> = ({
     const matchesCategory =
       selectedCategory.toLowerCase() === 'all' ||
       worker.position.toLowerCase() === selectedCategory.toLowerCase();
-
-    console.log('Worker Position:', worker.position);
-    console.log('Matches Category:', matchesCategory);
 
     return matchesSearchQuery && matchesCategory;
   });

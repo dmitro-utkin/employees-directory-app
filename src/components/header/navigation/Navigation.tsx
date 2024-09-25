@@ -7,7 +7,6 @@ interface NavigationProps {
 
 const Navigation: React.FC<NavigationProps> = ({ setSelectedCategory }) => {
   const handleCategoryClick = (category: string) => {
-    console.log('Category Clicked:', category);
     setSelectedCategory(category);
   };
 
