@@ -1,5 +1,5 @@
 import React from 'react';
-import magnifyingGlass from '../../../images/magnifying-glass.png';
+import magnifyingGlass from '../../../images/magnifying_glass.png';
 import './notFoundBlock.scss';
 
 const NotFoundBlock = () => (

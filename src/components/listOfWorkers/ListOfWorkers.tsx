@@ -14,12 +14,14 @@ interface ListOfWorkersProps {
   activeFilter: 'alphabet' | 'birthday';
   searchQuery: string;
   selectedCategory: string;
+  onWorkerClick: (workerId: number) => void;
 }
 
 const ListOfWorkers: React.FC<ListOfWorkersProps> = ({
   activeFilter,
   searchQuery,
   selectedCategory,
+  onWorkerClick,
 }) => {
   const dispatch = useDispatch();
   const workers = useSelector((state: RootState) => state.workers.workers);
@@ -101,14 +103,24 @@ const ListOfWorkers: React.FC<ListOfWorkersProps> = ({
                 <React.Fragment key={year}>
                   <YearsBlock year={year} />
                   {workerGroupsByYear[year].map((worker: WorkerData) => (
-                    <Worker key={worker.id} worker={worker} showBirthDate={true} />
+                    <Worker
+                      key={worker.id}
+                      worker={worker}
+                      showBirthDate={true}
+                      onClick={() => onWorkerClick(worker.id)}
+                    />
                   ))}
                 </React.Fragment>
               );
             })}
           {activeFilter === 'alphabet' &&
             sortedWorkers.map((worker: WorkerData) => (
-              <Worker key={worker.id} worker={worker} showBirthDate={false} />
+              <Worker
+                key={worker.id}
+                worker={worker}
+                showBirthDate={false}
+                onClick={() => onWorkerClick(worker.id)}
+              />
             ))}
         </>
       )}

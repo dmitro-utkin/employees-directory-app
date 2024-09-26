@@ -9,6 +9,16 @@ body {
   margin: 0 auto;
   color: #050510;
   font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+.page {
+  position: relative;
+  max-width: 1280px;
+  min-width: 375px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: #fff;
 }
 
 .container {
