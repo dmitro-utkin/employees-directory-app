@@ -1,7 +1,8 @@
 .worker {
   display: flex;
   align-items: center;
-  height: 84px;
+  height: 80px;
+  gap: 4px;
   cursor: pointer;
 
   &__image {
