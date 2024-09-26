@@ -9,7 +9,7 @@ import CallButtons from '../callButton/CallButtons';
 
 interface WorkerInfoProps {
   workerId: number;
-  onBackClick: () => void; // Callback to go back to the list
+  onBackClick: () => void;
 }
 
 const age = (birthDate: string) => {
