@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../common/state/store';
 import leftArrowIcon from '../../../images/left_arrow_icon.png';
 import starIcon from '../../../images/star_icon.png';
 import phoneIcon from '../../../images/phone_icon.png';
-import './workerInfo.scss';
 import CallButtons from '../callButton/CallButtons';
+import './workerInfo.scss';
+
+interface WorkerData {
+  id: number;
+  name: string;
+  birthDate: string;
+  phone: string;
+  avatar: string;
+  tag: string;
+  position: string;
+}
 
 interface WorkerInfoProps {
   workerId: number;
@@ -15,16 +25,20 @@ interface WorkerInfoProps {
 const age = (birthDate: string) => {
   const today = new Date();
   const birthDateObj = new Date(birthDate);
-  let age = today.getFullYear() - birthDateObj.getFullYear();
-  return age;
+  return today.getFullYear() - birthDateObj.getFullYear();
 };
 
 const WorkerInfo: React.FC<WorkerInfoProps> = ({ workerId, onBackClick }) => {
   const [showCallButtons, setShowCallButtons] = useState(false);
-  const worker = useSelector((state: RootState) =>
-    state.workers.workers.find(worker => worker.id === workerId),
-  );
+  const [workers, setWorkers] = useState<WorkerData[]>([]);
 
+  const allWorkers = useSelector((state: RootState) => state.workers.workers);
+
+  useEffect(() => {
+    setWorkers(allWorkers);
+  }, [allWorkers]);
+  const worker = workers.find(worker => worker.id === workerId);
+  console.log(worker)
   if (!worker) {
     return <div>Worker not found</div>;
   }
@@ -51,7 +65,6 @@ const WorkerInfo: React.FC<WorkerInfoProps> = ({ workerId, onBackClick }) => {
             {worker.position[0].toUpperCase() + worker.position.slice(1)}
           </span>
         </div>
-
         <div className="worker-info__body">
           <div className="worker-info__birth">
             <div className="worker-info__star">
