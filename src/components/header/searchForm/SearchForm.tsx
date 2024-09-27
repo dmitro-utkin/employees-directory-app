@@ -7,6 +7,7 @@ interface SearchFormProps {
   onToggleFilterMenu: () => void;
   isFilterMenuVisible: boolean;
   onSearch: (query: string) => void;
+  searchQuery: string;
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onToggleFilterMenu, isFilterMenuVisible, onSearch }) => {

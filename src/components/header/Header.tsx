@@ -5,18 +5,13 @@ import Navigation from '../header/navigation/Navigation';
 import './header.scss';
 
 interface HeaderProps {
-  setActiveFilter: (filter: 'alphabet' | 'birthday') => void;
-  setSearchQuery: (query: string) => void;
+  updateSearchParams: (params: { [key: string]: string }) => void;
   activeFilter: 'alphabet' | 'birthday';
-  setSelectedCategory: (category: string) => void;
+  searchQuery: string; // Додано властивість searchQuery
+  selectedCategory: string;
 }
 
-const Header: React.FC<HeaderProps> = ({
-  setActiveFilter,
-  setSearchQuery,
-  activeFilter,
-  setSelectedCategory,
-}) => {
+const Header: React.FC<HeaderProps> = ({ updateSearchParams, activeFilter, searchQuery, selectedCategory }) => {
   const [isFilterMenuVisible, setIsFilterMenuVisible] = useState<boolean>(false);
 
   const handleToggleFilterMenu = () => {
@@ -24,11 +19,15 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const handleFilterChange = (filter: 'alphabet' | 'birthday') => {
-    setActiveFilter(filter);
+    updateSearchParams({ sortBy: filter });
   };
 
   const handleSearch = (query: string) => {
-    setSearchQuery(query);
+    updateSearchParams({ searchText: query });
+  };
+
+  const handleCategoryChange = (category: string) => {
+    updateSearchParams({ position: category });
   };
 
   return (
@@ -38,6 +37,7 @@ const Header: React.FC<HeaderProps> = ({
         onToggleFilterMenu={handleToggleFilterMenu}
         isFilterMenuVisible={isFilterMenuVisible}
         onSearch={handleSearch}
+        searchQuery={searchQuery}
       />
       {isFilterMenuVisible && (
         <FilterMenu
@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({
           activeFilter={activeFilter}
         />
       )}
-      <Navigation setSelectedCategory={setSelectedCategory} />
+      <Navigation setSelectedCategory={handleCategoryChange} selectedCategory={selectedCategory} />
     </div>
   );
 };
