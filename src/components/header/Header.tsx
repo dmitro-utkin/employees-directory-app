@@ -7,7 +7,7 @@ import './header.scss';
 interface HeaderProps {
   updateSearchParams: (params: { [key: string]: string }) => void;
   activeFilter: 'alphabet' | 'birthday';
-  searchQuery: string; // Додано властивість searchQuery
+  searchQuery: string;
   selectedCategory: string;
 }
 

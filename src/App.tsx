@@ -10,8 +10,8 @@ const App = () => {
   const [selectedWorkerId, setSelectedWorkerId] = useState<number | null>(null);
 
   const activeFilter = (searchParams.get('sortBy') as 'alphabet' | 'birthday') || 'alphabet';
-  const searchQuery = searchParams.get('searchText') || '';
-  const selectedCategory = searchParams.get('position') || 'All';
+  const searchQuery = searchParams.get('searchText') ?? '';
+  const selectedCategory = searchParams.get('position') ?? 'All';
 
   const handleWorkerClick = (workerId: number) => {
     setSelectedWorkerId(workerId);
