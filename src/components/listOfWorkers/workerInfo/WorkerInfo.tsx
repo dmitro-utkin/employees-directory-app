@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../common/state/store';
 import leftArrowIcon from '../../../images/left_arrow_icon.png';
@@ -6,16 +6,6 @@ import starIcon from '../../../images/star_icon.png';
 import phoneIcon from '../../../images/phone_icon.png';
 import CallButtons from '../callButton/CallButtons';
 import './workerInfo.scss';
-
-interface WorkerData {
-  id: number;
-  name: string;
-  birthDate: string;
-  phone: string;
-  avatar: string;
-  tag: string;
-  position: string;
-}
 
 interface WorkerInfoProps {
   workerId: number;
@@ -28,17 +18,27 @@ const age = (birthDate: string) => {
   return today.getFullYear() - birthDateObj.getFullYear();
 };
 
-const WorkerInfo: React.FC<WorkerInfoProps> = ({ workerId, onBackClick }) => {
+const WorkerInfo: React.FC<WorkerInfoProps> = React.memo(({ workerId, onBackClick }) => {
   const [showCallButtons, setShowCallButtons] = useState(false);
-  const [workers, setWorkers] = useState<WorkerData[]>([]);
 
-  const allWorkers = useSelector((state: RootState) => state.workers.workers);
+  const workers = useSelector((state: RootState) => state.workers.workers);
+  const loading = useSelector((state: RootState) => state.workers.loading);
+  const error = useSelector((state: RootState) => state.workers.error);
 
-  useEffect(() => {
-    setWorkers(allWorkers);
-  }, [allWorkers]);
-  const worker = workers.find(worker => worker.id === workerId);
-  console.log(worker)
+  const worker = workers.find(worker => Number(worker.id) === workerId);
+
+  const handleCallButtonClick = useCallback(() => {
+    setShowCallButtons(true);
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading workers: {error}</div>;
+  }
+
   if (!worker) {
     return <div>Worker not found</div>;
   }
@@ -74,7 +74,7 @@ const WorkerInfo: React.FC<WorkerInfoProps> = ({ workerId, onBackClick }) => {
             <span className="worker-info__age">{age(worker.birthDate)} years</span>
           </div>
         </div>
-        <div className="worker-info__call-btn" onClick={() => setShowCallButtons(true)}>
+        <div className="worker-info__call-btn" onClick={handleCallButtonClick}>
           <div className="worker-info__phone">
             <img src={phoneIcon} alt="phone" />
           </div>
@@ -84,6 +84,6 @@ const WorkerInfo: React.FC<WorkerInfoProps> = ({ workerId, onBackClick }) => {
       {showCallButtons && <CallButtons phoneNumber={worker.phone} cancel={setShowCallButtons} />}
     </>
   );
-};
+});
 
 export default WorkerInfo;

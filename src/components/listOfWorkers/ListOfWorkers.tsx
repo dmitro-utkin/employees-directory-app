@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../common/state/store';
-import { WorkerData, setWorkers } from '../../common/state/workersSlice';
-import { fetchWorkersData } from '../../common/gateway/gateway';
+import { WorkerData } from '../../common/state/workersSlice';
 import Worker from './worker/Worker';
 import YearsBlock from './yearsBlock/YearsBlock';
 import NotFoundBlock from './notFoundBlock/NotFoundBlock';
@@ -23,31 +22,12 @@ const ListOfWorkers: React.FC<ListOfWorkersProps> = ({
   selectedCategory,
   onWorkerClick,
 }) => {
-  const dispatch = useDispatch();
   const workers = useSelector((state: RootState) => state.workers.workers);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchWorkers = async () => {
-      try {
-        const data: WorkerData[] = await fetchWorkersData();
-        dispatch(setWorkers(data));
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchWorkers();
-  }, [dispatch]);
+  const loading = useSelector((state: RootState) => state.workers.loading);
+  const error = useSelector((state: RootState) => state.workers.error);
 
   if (loading) {
-    return (
-      <div>
-        <Skeleton />
-      </div>
-    );
+    return <Skeleton />;
   }
 
   if (error) {
