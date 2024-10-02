@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import searchIcon from '../../../images/search_icon.png';
 import burgerIcon from '../../../images/burger_icon.svg';
 import './searchForm.scss';
@@ -11,7 +11,13 @@ interface SearchFormProps {
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onToggleFilterMenu, isFilterMenuVisible, onSearch }) => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>(() => {
+    return localStorage.getItem('searchQuery') || '';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('searchQuery', searchQuery);
+  }, [searchQuery]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
