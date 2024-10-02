@@ -34,7 +34,7 @@ const ListOfWorkers: React.FC<ListOfWorkersProps> = ({
     return <ErrorPage />;
   }
 
-  const filteredWorkers = workers.filter(worker => {
+  const filteredWorkers = workers.filter((worker) => {
     const searchQueryLower = searchQuery.toLowerCase();
     const matchesSearchQuery =
       worker.name.toLowerCase().includes(searchQueryLower) ||
@@ -77,7 +77,7 @@ const ListOfWorkers: React.FC<ListOfWorkersProps> = ({
       ) : (
         <>
           {activeFilter === 'birthday' &&
-            Object.keys(workerGroupsByYear).map(yearString => {
+            Object.keys(workerGroupsByYear).map((yearString) => {
               const year = Number(yearString);
               return (
                 <React.Fragment key={year}>

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-
+import { RootState } from './store';
 export interface WorkerData {
-    id: number;
+    id: string;
     avatar: string;
     name: string;
     tag: string;
@@ -23,25 +23,20 @@ const initialState: WorkersState = {
     error: null,
 };
 
-export const fetchWorkers = createAsyncThunk('workers/fetchWorkers', async () => {
-    try {
-        const response = await fetch('https://66a0f8b17053166bcabd894e.mockapi.io/api/workers');
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Failed to fetch workers: ${errorText}`);
-        }
-        const data: WorkerData[] = await response.json();
-        return data;
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new Error(`Network error: ${error.message}`);
-        } else {
-            throw new Error('An unknown error occurred');
-        }
+export const fetchWorkers = createAsyncThunk('workers/fetchWorkers', async (_, { getState }) => {
+    const { workers } = getState() as RootState;
+
+    if (workers.workers.length > 0) {
+        return;
     }
+
+    const response = await fetch('https://66a0f8b17053166bcabd894e.mockapi.io/api/workers');
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to fetch workers: ${errorText}`);
+    }
+    return await response.json();
 });
-
-
 
 const workersSlice = createSlice({
     name: 'workers',
@@ -59,15 +54,14 @@ const workersSlice = createSlice({
             })
             .addCase(fetchWorkers.fulfilled, (state, action: PayloadAction<WorkerData[]>) => {
                 state.loading = false;
-                state.workers = action.payload;
+                state.workers = action.payload || state.workers;
             })
             .addCase(fetchWorkers.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Failed to fetch workers';
+                state.error = action.error.message ?? 'Failed to fetch workers';
             });
     },
 });
 
 export const { setWorkers } = workersSlice.actions;
-
 export default workersSlice.reducer;

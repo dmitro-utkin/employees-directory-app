@@ -10,9 +10,13 @@ interface SearchFormProps {
   searchQuery: string;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onToggleFilterMenu, isFilterMenuVisible, onSearch }) => {
+const SearchForm: React.FC<SearchFormProps> = ({
+  onToggleFilterMenu,
+  isFilterMenuVisible,
+  onSearch,
+}) => {
   const [searchQuery, setSearchQuery] = useState<string>(() => {
-    return localStorage.getItem('searchQuery') || '';
+    return localStorage.getItem('searchQuery') ?? '';
   });
 
   useEffect(() => {
