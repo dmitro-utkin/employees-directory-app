@@ -13,7 +13,7 @@ interface ListOfWorkersProps {
   activeFilter: 'alphabet' | 'birthday';
   searchQuery: string;
   selectedCategory: string;
-  onWorkerClick: (workerId: number) => void;
+  onWorkerClick: (workerId: string) => void;
 }
 
 const ListOfWorkers: React.FC<ListOfWorkersProps> = ({

@@ -3,7 +3,6 @@ import './navigation.scss';
 
 interface NavigationProps {
   setSelectedCategory: (category: string) => void;
-  selectedCategory: string;
 }
 
 const Navigation: React.FC<NavigationProps> = ({ setSelectedCategory }) => {

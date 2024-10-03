@@ -3,7 +3,7 @@ import './worker.scss';
 
 interface WorkerProps {
   worker: {
-    id: number;
+    id: string;
     avatar: string;
     name: string;
     tag: string;

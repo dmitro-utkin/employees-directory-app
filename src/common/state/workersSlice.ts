@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchWorkers } from '../gateway.ts/gateway';
 export interface WorkerData {
     id: string;
     avatar: string;
@@ -22,21 +22,6 @@ const initialState: WorkersState = {
     loading: false,
     error: null,
 };
-
-export const fetchWorkers = createAsyncThunk('workers/fetchWorkers', async (_, { getState }) => {
-    const { workers } = getState() as RootState;
-
-    if (workers.workers.length > 0) {
-        return;
-    }
-
-    const response = await fetch('https://66a0f8b17053166bcabd894e.mockapi.io/api/workers');
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to fetch workers: ${errorText}`);
-    }
-    return await response.json();
-});
 
 const workersSlice = createSlice({
     name: 'workers',

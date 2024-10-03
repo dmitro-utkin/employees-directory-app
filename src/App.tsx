@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from './common/state/store';
-import { fetchWorkers } from './common/state/workersSlice';
+import { fetchWorkers } from './common/gateway.ts/gateway';
 import Header from './components/header/Header';
 import ListOfWorkers from './components/listOfWorkers/ListOfWorkers';
 import WorkerInfo from './components/listOfWorkers/workerInfo/WorkerInfo';
@@ -13,7 +13,8 @@ const App = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const selectedWorkerId = searchParams.get('workerId');
-  const activeFilter = (searchParams.get('sortBy') as 'alphabet' | 'birthday') || 'alphabet';
+  const sortBy = searchParams.get('sortBy');
+  const activeFilter = (sortBy === 'alphabet' || sortBy === 'birthday') ? sortBy : 'alphabet';
   const searchQuery = searchParams.get('searchText') ?? '';
   const selectedCategory = searchParams.get('position') ?? 'All';
 
@@ -21,8 +22,13 @@ const App = () => {
     dispatch(fetchWorkers());
   }, [dispatch]);
 
+  const updateSearchParams = (newParams: { [key: string]: string }) => {
+    const params = { ...Object.fromEntries(searchParams), ...newParams };
+    setSearchParams(params);
+  };
+
   const handleWorkerClick = (workerId: number) => {
-    setSearchParams({ ...Object.fromEntries(searchParams), workerId: workerId.toString() });
+    updateSearchParams({ workerId: workerId.toString() });
   };
 
   const handleBackClick = () => {
@@ -34,7 +40,7 @@ const App = () => {
   return (
     <div className="page">
       <Header
-        updateSearchParams={setSearchParams}
+        updateSearchParams={updateSearchParams}
         activeFilter={activeFilter}
         searchQuery={searchQuery}
         selectedCategory={selectedCategory}

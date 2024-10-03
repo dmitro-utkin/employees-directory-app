@@ -14,23 +14,22 @@ const SearchForm: React.FC<SearchFormProps> = ({
   onToggleFilterMenu,
   isFilterMenuVisible,
   onSearch,
+  searchQuery,
 }) => {
-  const [searchQuery, setSearchQuery] = useState<string>(() => {
-    return localStorage.getItem('searchQuery') ?? '';
-  });
+  const [inputQuery, setInputQuery] = useState<string>(searchQuery);
 
   useEffect(() => {
-    localStorage.setItem('searchQuery', searchQuery);
+    setInputQuery(searchQuery);
   }, [searchQuery]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
-    setSearchQuery(query);
+    setInputQuery(query);
     onSearch(query);
   };
 
   const handleCancel = () => {
-    setSearchQuery('');
+    setInputQuery('');
     onSearch('');
   };
 
@@ -42,7 +41,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
           className="search-form__input"
           type="text"
           placeholder="Enter name, tag, email..."
-          value={searchQuery}
+          value={inputQuery}
           onChange={handleInputChange}
         />
         <button
