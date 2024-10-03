@@ -2,7 +2,7 @@
 
 - employees-directory-app
 
-### [Site link]()
+### [Site link](https://employees-directory-app.netlify.app/)
 
 ### The tech stack is
 
