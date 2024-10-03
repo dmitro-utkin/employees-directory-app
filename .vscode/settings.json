@@ -1,8 +1,0 @@
-{
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#251D6D",
-    "titleBar.activeBackground": "#342999",
-    "titleBar.activeForeground": "#FAFAFE"
-  },
-  "cSpell.words": ["reduxjs"]
-}
