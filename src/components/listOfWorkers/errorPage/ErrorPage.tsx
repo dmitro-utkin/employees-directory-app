@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import errorIcon from '../../../images/error_icon.png';
+import errorIcon from '../../../../public/images/error_icon.png';
 import './errorPage.scss';
 
 const ErrorPage = () => {

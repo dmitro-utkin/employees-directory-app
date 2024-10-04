@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import searchIcon from '../../../images/search_icon.png';
-import burgerIcon from '../../../images/burger_icon.svg';
+import searchIcon from '../../../../public/images/search_icon.png';
+import burgerIcon from '../../../../public/images/burger_icon.svg';
 import './searchForm.scss';
 
 interface SearchFormProps {

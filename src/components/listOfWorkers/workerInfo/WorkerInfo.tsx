@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../common/state/store';
-import leftArrowIcon from '../../../images/left_arrow_icon.png';
-import starIcon from '../../../images/star_icon.png';
-import phoneIcon from '../../../images/phone_icon.png';
+import leftArrowIcon from '../../../../public/images/left_arrow_icon.png';
+import starIcon from '../../../../public/images/star_icon.png';
+import phoneIcon from '../../../../public/images/phone_icon.png';
 import CallButtons from '../callButton/CallButtons';
 import './workerInfo.scss';
 
