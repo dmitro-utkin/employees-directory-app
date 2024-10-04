@@ -3,9 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from './common/state/store';
 import { fetchWorkers } from './common/gateway.ts/gateway';
-import Header from './components/header/Header';
-import ListOfWorkers from './components/listOfWorkers/ListOfWorkers';
-import WorkerInfo from './components/listOfWorkers/workerInfo/WorkerInfo';
+import FilterBlock from './features/FilterBlock';
+import EmployeesList from './features/EmployeesList';
+import EmployeeInfo from './features/EmployeesList/components/EmployeeInfo';
 import './index.scss';
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
     setSearchParams(params);
   };
 
-  const handleWorkerClick = (workerId: number) => {
+  const handleWorkerClick = (workerId: string) => {
     updateSearchParams({ workerId: workerId.toString() });
   };
 
@@ -39,21 +39,20 @@ const App = () => {
 
   return (
     <div className="page">
-      <Header
+      <FilterBlock
         updateSearchParams={updateSearchParams}
         activeFilter={activeFilter}
         searchQuery={searchQuery}
-        selectedCategory={selectedCategory}
       />
       {!selectedWorkerId ? (
-        <ListOfWorkers
+        <EmployeesList
           activeFilter={activeFilter}
           searchQuery={searchQuery}
           selectedCategory={selectedCategory}
           onWorkerClick={handleWorkerClick}
         />
       ) : (
-        <WorkerInfo workerId={Number(selectedWorkerId)} onBackClick={handleBackClick} />
+        <EmployeeInfo workerId={Number(selectedWorkerId)} onBackClick={handleBackClick} />
       )}
     </div>
   );
