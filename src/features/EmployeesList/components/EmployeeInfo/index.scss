@@ -1,3 +1,6 @@
+@import './../../../../common/scss/breakpoint.scss';
+
+
 .employee-info {
     position: absolute;
     top: 0;
@@ -24,6 +27,11 @@
     border: none;
     outline: none;
     cursor: pointer;
+
+    @include for-large-up {
+      top: 25px;
+      left: 27px;
+    }
   }
 
   &__avatar {
@@ -68,11 +76,13 @@
     display: flex;
     align-items: center;
     height: 60px;
-    margin-bottom: 6px;
+    margin-bottom: 9px;
   }
 
   &__star {
-    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+    margin: 4px 10px 0 2px;
   }
 
   &__age{
@@ -91,7 +101,9 @@
   }
 
   &__phone {
-    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+    margin: 3px 10px 0 1px;
   }
 }
 
