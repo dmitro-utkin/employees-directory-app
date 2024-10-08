@@ -8,8 +8,6 @@
   width: 100%;
   margin: 22px 0;
   color: #c3c3c6;
-  font-size: 15px;
-  font-weight: 500;
 
   &__line {
     width: 72px;
@@ -28,9 +26,12 @@
       width: 40%;
     }
 
-    &__title {
-      padding: 0;
-      margin: 0;
-    }
+  }
+  
+  &__title {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
   }
 }
