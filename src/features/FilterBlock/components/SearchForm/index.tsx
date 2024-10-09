@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import searchIcon from '../../../../../public/images/search_icon.png';
-import burgerIcon from '../../../../../public/images/burger_icon.svg';
 import './index.scss';
 
 interface SearchFormProps {
@@ -36,7 +34,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
   return (
     <div className="search-form">
       <form className="search-form__form">
-        <img className="search-form__search-icon" src={searchIcon} alt="search-icon" />
+        <img className="search-form__search-icon" src="/images/search_icon.png" alt="search-icon" />
         <input
           className="search-form__input"
           type="text"
@@ -51,7 +49,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
         >
           <img
             className={`burger ${isFilterMenuVisible ? 'burger_active' : ''}`}
-            src={burgerIcon}
+            src="/images/burger_icon.svg"
             alt="burger-menu"
           />
         </button>

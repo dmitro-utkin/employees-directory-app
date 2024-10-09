@@ -1,9 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../common/state/store';
-import leftArrowIcon from '../../../../../public/images/left_arrow_icon.png';
-import starIcon from '../../../../../public/images/star_icon.png';
-import phoneIcon from '../../../../../public/images/phone_icon.png';
 import CallButtons from '../EmployeeInfo/components/CallButton';
 import './index.scss';
 
@@ -54,7 +51,7 @@ const EmployeeInfo: React.FC<WorkerInfoProps> = React.memo(({ workerId, onBackCl
       <section className={`employee-info ${showCallButtons ? 'blur-page' : ''}`}>
         <div className="employee-info__header">
           <button className="employee-info__close-btn" onClick={onBackClick}>
-            <img src={leftArrowIcon} alt="left arrow" />
+            <img src="/images/left_arrow_icon.png" alt="left arrow" />
           </button>
           <img className="employee-info__avatar" src={worker.avatar} alt="avatar" />
           <h2 className="employee-info__name">
@@ -68,7 +65,7 @@ const EmployeeInfo: React.FC<WorkerInfoProps> = React.memo(({ workerId, onBackCl
         <div className="employee-info__body">
           <div className="employee-info__birth">
             <div className="employee-info__star">
-              <img src={starIcon} alt="star" />
+              <img src="/images/star_icon.png" alt="star" />
             </div>
             {formattedBirthDate}
             <span className="employee-info__age">{age(worker.birthDate)} years</span>
@@ -76,7 +73,7 @@ const EmployeeInfo: React.FC<WorkerInfoProps> = React.memo(({ workerId, onBackCl
         </div>
         <div className="employee-info__call-btn" onClick={handleCallButtonClick}>
           <div className="employee-info__phone">
-            <img src={phoneIcon} alt="phone" />
+            <img src="/images/phone_icon.png" alt="phone" />
           </div>
           {worker.phone}
         </div>
