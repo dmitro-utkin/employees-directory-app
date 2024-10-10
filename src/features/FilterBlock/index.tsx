@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import SearchForm from './components/SearchForm';
 import FilterMenu from './components/SearchForm/components/FilterMenu';
 import Navigation from './components/Navigation';
 import './index.scss';
 
-interface FilterBlockProps {
-  updateSearchParams: (params: { [key: string]: string }) => void;
-  activeFilter: 'alphabet' | 'birthday';
-  searchQuery: string;
-}
-
-const FilterBlock: React.FC<FilterBlockProps> = ({ updateSearchParams, activeFilter, searchQuery }) => {
+const FilterBlock: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isFilterMenuVisible, setIsFilterMenuVisible] = useState<boolean>(false);
+
+  const sortBy = searchParams.get('sortBy');
+  const activeFilter = (sortBy === 'alphabet' || sortBy === 'birthday') ? sortBy : 'alphabet';
+  const searchQuery = searchParams.get('searchText') ?? '';
 
   const handleToggleFilterMenu = () => {
     setIsFilterMenuVisible(prevState => !prevState);
   };
 
   const handleFilterChange = (filter: 'alphabet' | 'birthday') => {
-    updateSearchParams({ sortBy: filter });
+    setSearchParams({ ...Object.fromEntries(searchParams), sortBy: filter });
   };
 
   const handleSearch = (query: string) => {
-    updateSearchParams({ searchText: query });
+    setSearchParams({ ...Object.fromEntries(searchParams), searchText: query });
   };
 
   const handleCategoryChange = (category: string) => {
-    updateSearchParams({ position: category });
+    setSearchParams({ ...Object.fromEntries(searchParams), position: category });
   };
 
   return (
@@ -46,7 +46,7 @@ const FilterBlock: React.FC<FilterBlockProps> = ({ updateSearchParams, activeFil
           activeFilter={activeFilter}
         />
       )}
-      <Navigation setSelectedCategory={handleCategoryChange}  />
+      <Navigation setSelectedCategory={handleCategoryChange} />
     </div>
   );
 };

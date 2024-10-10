@@ -1,32 +1,29 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../../common/state/store';
 import CallButtons from '../EmployeeInfo/components/CallButton';
+import { age } from '../../../../common/utils';
 import './index.scss';
 
-interface WorkerInfoProps {
-  workerId: number;
-  onBackClick: () => void;
-}
-
-const age = (birthDate: string) => {
-  const today = new Date();
-  const birthDateObj = new Date(birthDate);
-  return today.getFullYear() - birthDateObj.getFullYear();
-};
-
-const EmployeeInfo: React.FC<WorkerInfoProps> = React.memo(({ workerId, onBackClick }) => {
+const EmployeeInfo: React.FC = React.memo(() => {
   const [showCallButtons, setShowCallButtons] = useState(false);
+  const { employeeId } = useParams<{ employeeId: string }>();
+  const navigate = useNavigate();
 
   const workers = useSelector((state: RootState) => state.workers.workers);
   const loading = useSelector((state: RootState) => state.workers.loading);
   const error = useSelector((state: RootState) => state.workers.error);
 
-  const worker = workers.find(worker => Number(worker.id) === workerId);
+  const worker = workers.find(worker => worker.id === String(employeeId));
 
   const handleCallButtonClick = useCallback(() => {
     setShowCallButtons(true);
   }, []);
+
+  const handleBackClick = () => {
+    navigate('/');
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -50,7 +47,7 @@ const EmployeeInfo: React.FC<WorkerInfoProps> = React.memo(({ workerId, onBackCl
     <>
       <section className={`employee-info ${showCallButtons ? 'blur-page' : ''}`}>
         <div className="employee-info__header">
-          <button className="employee-info__close-btn" onClick={onBackClick}>
+          <button className="employee-info__close-btn" onClick={handleBackClick}>
             <img src="/images/left_arrow_icon.png" alt="left arrow" />
           </button>
           <img className="employee-info__avatar" src={worker.avatar} alt="avatar" />
