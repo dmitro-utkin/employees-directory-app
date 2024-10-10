@@ -4,8 +4,8 @@ import { RootState } from '../../common/state/store';
 import { WorkerData } from '../../common/state/workersSlice';
 import Worker from './components/EmployeeCard';
 import YearsBlock from './components/YearsBlock';
-import NotFoundBlock from './components/Errors/NotFoundBlock';
-import ErrorPage from './components/Errors/ErrorPage';
+import NotFoundBlock from '../Errors/NotFoundBlock';
+import ErrorPage from '../Errors/ErrorPage';
 import Skeleton from './components/Skeleton';
 import './index.scss';
 
