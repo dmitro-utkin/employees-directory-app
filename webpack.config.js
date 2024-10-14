@@ -3,8 +3,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
@@ -14,6 +14,7 @@ module.exports = (env, argv) => {
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'dist'),
+      publicPath: '/',
     },
     module: {
       rules: [
@@ -39,11 +40,11 @@ module.exports = (env, argv) => {
                 limit: 8192,
                 name: '[name].[ext]',
                 outputPath: 'images',
-                publicPath: '/images'
-              }
-            }
-          ]
-        }
+                publicPath: '/images',
+              },
+            },
+          ],
+        },
       ],
     },
     resolve: {
@@ -72,12 +73,13 @@ module.exports = (env, argv) => {
   };
 
   if (isProduction) {
-    config.plugins.push(new webpack.HotModuleReplacementPlugin());
     config.plugins.push(
       new MiniCssExtractPlugin({
         filename: '[name].css',
       }),
     );
+  } else {
+    config.plugins.push(new webpack.HotModuleReplacementPlugin());
   }
 
   return config;
