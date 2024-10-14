@@ -4,7 +4,16 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../../common/state/store';
 import CallButtons from '../EmployeeInfo/components/CallButton';
 import { age } from '../../../../common/utils';
+import styled from 'styled-components';
 import './index.scss';
+
+const StyledLoader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 30px;
+`;
 
 const EmployeeInfo: React.FC = React.memo(() => {
   const [showCallButtons, setShowCallButtons] = useState(false);
@@ -26,7 +35,7 @@ const EmployeeInfo: React.FC = React.memo(() => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <StyledLoader>Loading...</StyledLoader>;
   }
 
   if (error) {
