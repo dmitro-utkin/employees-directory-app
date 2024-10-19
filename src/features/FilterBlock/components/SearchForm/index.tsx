@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { SearchFormProps } from '../../../../common/types';
 import './index.scss';
-
-interface SearchFormProps {
-  onToggleFilterMenu: () => void;
-  isFilterMenuVisible: boolean;
-  onSearch: (query: string) => void;
-  searchQuery: string;
-}
 
 const SearchForm: React.FC<SearchFormProps> = ({
   onToggleFilterMenu,
@@ -14,20 +8,20 @@ const SearchForm: React.FC<SearchFormProps> = ({
   onSearch,
   searchQuery,
 }) => {
-  const [inputQuery, setInputQuery] = useState<string>(searchQuery);
+  const [searchText, setSearchText] = useState<string>(searchQuery);
 
   useEffect(() => {
-    setInputQuery(searchQuery);
+    setSearchText(searchQuery);
   }, [searchQuery]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
-    setInputQuery(query);
+    setSearchText(query);
     onSearch(query);
   };
 
   const handleCancel = () => {
-    setInputQuery('');
+    setSearchText('');
     onSearch('');
   };
 
@@ -39,7 +33,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
           className="search-form__input"
           type="text"
           placeholder="Enter name, tag, email..."
-          value={inputQuery}
+          value={searchText}
           onChange={handleInputChange}
         />
         <button

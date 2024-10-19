@@ -1,13 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useSearchParams, Link } from 'react-router-dom';
-import { RootState } from '../../common/state/store';
 import { WorkerData } from '../../common/state/workersSlice';
-import Worker from './components/EmployeeCard';
+import EmployeeCard from './components/EmployeeCard';
 import YearsBlock from './components/YearsBlock';
 import NotFoundBlock from '../Errors/NotFoundBlock';
 import ErrorPage from '../Errors/ErrorPage';
 import Skeleton from './components/Skeleton';
+import { RootState } from '../../common/state/store';
+
 import './index.scss';
 
 const EmployeesList: React.FC = () => {
@@ -63,7 +64,9 @@ const EmployeesList: React.FC = () => {
     }
   }
 
-  const noWorkersFound = filteredWorkers.length === 0;
+  if (!filteredWorkers.length) {
+    return <NotFoundBlock />;
+  }
 
   const handleWorkerClick = (workerId: string) => {
     setSearchParams({ ...Object.fromEntries(searchParams), workerId: workerId.toString() });
@@ -71,67 +74,36 @@ const EmployeesList: React.FC = () => {
 
   return (
     <ul className="employees-list">
-      {noWorkersFound ? (
-        <NotFoundBlock />
-      ) : (
-        <>
-          {activeFilter === 'birthday' &&
-            Object.keys(workerGroupsByYear).map(yearString => {
-              const year = Number(yearString);
-              return (
-                <React.Fragment key={year}>
-                  <YearsBlock year={year} />
-                  {workerGroupsByYear[year].map((worker: WorkerData) => (
-                    <Link key={worker.id} to={`/employee/${worker.id}`}>
-                      <Worker
-                        worker={worker}
-                        showBirthDate={true}
-                        onClick={() => handleWorkerClick(worker.id)}
-                      />
-                    </Link>
-                  ))}
-                </React.Fragment>
-              );
-            })}
-          {activeFilter === 'alphabet' &&
-            sortedWorkers.map((worker: WorkerData) => (
-              <Link key={worker.id} to={`/employee/${worker.id}`}>
-                <Worker
-                  worker={worker}
-                  showBirthDate={false}
-                  onClick={() => handleWorkerClick(worker.id)}
-                />
-              </Link>
-            ))}
-        </>
-      )}
+      {activeFilter === 'birthday' &&
+        Object.keys(workerGroupsByYear).map(yearString => {
+          const year = Number(yearString);
+          return (
+            <React.Fragment key={year}>
+              <YearsBlock year={year} />
+              {workerGroupsByYear[year].map((worker: WorkerData) => (
+                <Link key={worker.id} to={`/employee/${worker.id}`}>
+                  <EmployeeCard
+                    employee={worker}
+                    showBirthDate={true}
+                    onClick={() => handleWorkerClick(worker.id)}
+                  />
+                </Link>
+              ))}
+            </React.Fragment>
+          );
+        })}
+      {activeFilter === 'alphabet' &&
+        sortedWorkers.map((worker: WorkerData) => (
+          <Link key={worker.id} to={`/employee/${worker.id}`}>
+            <EmployeeCard
+              employee={worker}
+              showBirthDate={false}
+              onClick={() => handleWorkerClick(worker.id)}
+            />
+          </Link>
+        ))}
     </ul>
   );
 };
 
 export default EmployeesList;
-
-// import React from 'react';
-// import { useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom';
-// import './index.scss';
-
-// const EmployeesList: React.FC = () => {
-//   const workers = useSelector((state: RootState) => state.workers.workers);
-
-//   return (
-//     <div className="employees-list">
-//       {workers.map((worker) => (
-//         <Link key={worker.id} to={`/employee/${worker.id}`}>
-//           <div className="employee-card">
-//             <img className="employee-card__avatar" src={worker.avatar} alt="avatar" />
-//             <h2 className="employee-card__name">{worker.name}</h2>
-//             <span className="employee-card__position">{worker.position}</span>
-//           </div>
-//         </Link>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default EmployeesList;

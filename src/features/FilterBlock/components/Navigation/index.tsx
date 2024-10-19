@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { NavigationProps } from '../../../../common/types';
 import './index.scss';
-
-interface NavigationProps {
-  setSelectedCategory: (category: string) => void;
-}
 
 const Navigation: React.FC<NavigationProps> = ({ setSelectedCategory }) => {
   const [activeCategory, setActiveCategory] = useState<string>(() => {

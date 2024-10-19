@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../../common/state/store';
 import CallButtons from '../EmployeeInfo/components/CallButton';
-import NotFoundBlock from '../../../Errors/NotFoundBlock';
-import { age } from '../../../../common/utils';
+// import NotFoundBlock from '../../../Errors/NotFoundBlock';
+import { getAge } from '../../../../common/utils';
 import {
   StyledLoader,
   StyledError,
@@ -52,7 +52,7 @@ const EmployeeInfo: React.FC = React.memo(() => {
             I can't get the employee's details. Check the ID instructions.
           </StyledErrorText>
         </StyledError>
-        <StyledNotFoundBlock style={{ height: 0, marginTop: '100px' }}/>
+        <StyledNotFoundBlock />
         <StyledErrorLink to="/">Back to list</StyledErrorLink>
       </>
     );
@@ -86,7 +86,7 @@ const EmployeeInfo: React.FC = React.memo(() => {
               <img src="/images/star_icon.png" alt="star" />
             </div>
             {formattedBirthDate}
-            <span className="employee-info__age">{age(worker.birthDate)} years</span>
+            <span className="employee-info__age">{getAge(worker.birthDate)} years</span>
           </div>
         </div>
         <div className="employee-info__call-btn" onClick={handleCallButtonClick}>

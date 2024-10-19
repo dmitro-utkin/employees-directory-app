@@ -1,10 +1,6 @@
 import React from 'react';
+import { CallOnNumberProps } from '../../../../../../common/types';
 import './index.scss';
-
-interface CallOnNumberProps {
-  phoneNumber: string | undefined;
-  cancel: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 const CallButtons: React.FC<CallOnNumberProps> = ({ phoneNumber, cancel }) => {
   return (
