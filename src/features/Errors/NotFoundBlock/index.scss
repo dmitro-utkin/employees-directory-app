@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 43vh;
+  min-height: 77vh;
   margin: 0 auto;
 
   &__img {
@@ -24,4 +24,9 @@
     line-height: 20px;
     color: #97979b;
   }
+}
+
+.not-found-block-custom {
+  height: 0px;
+  margin: 100px 0 16px;
 }

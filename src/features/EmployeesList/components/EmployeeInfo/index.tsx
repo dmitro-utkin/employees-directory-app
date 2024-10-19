@@ -3,17 +3,18 @@ import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../../common/state/store';
 import CallButtons from '../EmployeeInfo/components/CallButton';
+import NotFoundBlock from '../../../Errors/NotFoundBlock';
 import { age } from '../../../../common/utils';
-import styled from 'styled-components';
+import {
+  StyledLoader,
+  StyledError,
+  StyledErrorHeader,
+  StyledErrorText,
+  StyledErrorLink,
+  StyledNotFoundBlock,
+} from './index.styled';
 import './index.scss';
 
-const StyledLoader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 30px;
-`;
 
 const EmployeeInfo: React.FC = React.memo(() => {
   const [showCallButtons, setShowCallButtons] = useState(false);
@@ -43,7 +44,18 @@ const EmployeeInfo: React.FC = React.memo(() => {
   }
 
   if (!worker) {
-    return <div>Employee not found</div>;
+    return (
+      <>
+        <StyledError>
+          <StyledErrorHeader>Employee not found</StyledErrorHeader>
+          <StyledErrorText>
+            I can't get the employee's details. Check the ID instructions.
+          </StyledErrorText>
+        </StyledError>
+        <StyledNotFoundBlock style={{ height: 0, marginTop: '100px' }}/>
+        <StyledErrorLink to="/">Back to list</StyledErrorLink>
+      </>
+    );
   }
 
   const formattedBirthDate = new Date(worker.birthDate).toLocaleDateString('en-GB', {

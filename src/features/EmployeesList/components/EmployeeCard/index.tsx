@@ -1,8 +1,8 @@
 import React from 'react';
 import './index.scss';
 
-interface WorkerProps {
-  worker: {
+type EmployeeCardProps = {
+  employee: {
     id: string;
     avatar: string;
     name: string;
@@ -16,8 +16,8 @@ interface WorkerProps {
   onClick: () => void;
 }
 
-const EmployeeCard: React.FC<WorkerProps> = ({ worker, showBirthDate, onClick }) => {
-  const formattedBirthDate = new Date(worker.birthDate)
+const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee, showBirthDate, onClick }) => {
+  const formattedBirthDate = new Date(employee.birthDate)
     .toLocaleDateString('en-GB', {
       day: '2-digit',
       month: 'short',
@@ -25,16 +25,16 @@ const EmployeeCard: React.FC<WorkerProps> = ({ worker, showBirthDate, onClick })
     .replace(',', '');
 
   return (
-    <li className="employee" key={worker.id} onClick={onClick}>
+    <li className="employee" key={employee.id} onClick={onClick}>
       <div className="employee__image">
-        <img className="employee__avatar" src={worker.avatar} alt={worker.name} />
+        <img className="employee__avatar" src={employee.avatar} alt={employee.name} />
       </div>
 
       <div className="employee__name">
-        {worker.name}
-        {worker.tag && <span className="employee__tag">{worker.tag}</span>}
+        {employee.name}
+        {employee.tag && <span className="employee__tag">{employee.tag}</span>}
         <div className="employee__position">
-          {worker.position[0].toUpperCase() + worker.position.slice(1)}
+          {employee.position[0].toUpperCase() + employee.position.slice(1)}
         </div>
       </div>
 
