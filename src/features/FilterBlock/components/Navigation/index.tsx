@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { NavigationProps } from '../../../../common/types';
 import './index.scss';
 
+const categories = ['All', 'Designer', 'Analyst', 'Manager', 'iOS', 'Android'];
+
 const Navigation: React.FC<NavigationProps> = ({ setSelectedCategory }) => {
   const [activeCategory, setActiveCategory] = useState<string>(() => {
     return localStorage.getItem('activeCategory') ?? 'All';
@@ -19,42 +21,17 @@ const Navigation: React.FC<NavigationProps> = ({ setSelectedCategory }) => {
   return (
     <div className="navigation">
       <ul className="navigation__list">
-        <li
-          className={`navigation__item ${activeCategory === 'All' ? 'navigation__item_active' : ''}`}
-          onClick={() => handleCategoryClick('All')}
-        >
-          All
-        </li>
-        <li
-          className={`navigation__item ${activeCategory === 'Designer' ? 'navigation__item_active' : ''}`}
-          onClick={() => handleCategoryClick('Designer')}
-        >
-          Designers
-        </li>
-        <li
-          className={`navigation__item ${activeCategory === 'Analyst' ? 'navigation__item_active' : ''}`}
-          onClick={() => handleCategoryClick('Analyst')}
-        >
-          Analysts
-        </li>
-        <li
-          className={`navigation__item ${activeCategory === 'Manager' ? 'navigation__item_active' : ''}`}
-          onClick={() => handleCategoryClick('Manager')}
-        >
-          Managers
-        </li>
-        <li
-          className={`navigation__item ${activeCategory === 'iOS' ? 'navigation__item_active' : ''}`}
-          onClick={() => handleCategoryClick('iOS')}
-        >
-          iOS
-        </li>
-        <li
-          className={`navigation__item ${activeCategory === 'Android' ? 'navigation__item_active' : ''}`}
-          onClick={() => handleCategoryClick('Android')}
-        >
-          Android
-        </li>
+        {categories.map(category => (
+          <li
+            key={category}
+            className={`navigation__item ${
+              activeCategory === category ? 'navigation__item_active' : ''
+            }`}
+            onClick={() => handleCategoryClick(category)}
+          >
+            {category}
+          </li>
+        ))}
       </ul>
     </div>
   );

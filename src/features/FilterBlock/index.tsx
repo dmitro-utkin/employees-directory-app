@@ -13,20 +13,24 @@ const FilterBlock: React.FC = () => {
   const activeFilter = (sortBy === 'alphabet' || sortBy === 'birthday') ? sortBy : 'alphabet';
   const searchQuery = searchParams.get('searchText') ?? '';
 
+  const updateParams = (key: string, value: string) => {
+    setSearchParams({ ...Object.fromEntries(searchParams), [key]: value });
+  };
+
   const handleToggleFilterMenu = () => {
     setIsFilterMenuVisible(prevState => !prevState);
   };
 
-  const handleFilterChange = (filter: 'alphabet' | 'birthday') => {
-    setSearchParams({ ...Object.fromEntries(searchParams), sortBy: filter });
+  const handleSearch = (query: string) => {
+    updateParams('searchText', query);
   };
 
-  const handleSearch = (query: string) => {
-    setSearchParams({ ...Object.fromEntries(searchParams), searchText: query });
+  const handleFilterChange = (filter: 'alphabet' | 'birthday') => {
+    updateParams('sortBy', filter);
   };
 
   const handleCategoryChange = (category: string) => {
-    setSearchParams({ ...Object.fromEntries(searchParams), position: category });
+    updateParams('position', category);
   };
 
   return (

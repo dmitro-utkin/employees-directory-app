@@ -22,14 +22,6 @@ const EmployeesList: React.FC = () => {
   const searchQuery = searchParams.get('searchText') ?? '';
   const selectedCategory = searchParams.get('position') ?? 'All';
 
-  if (loading) {
-    return <Skeleton />;
-  }
-
-  if (error) {
-    return <ErrorPage />;
-  }
-
   const filteredWorkers = workers.filter(worker => {
     const searchQueryLower = searchQuery.toLowerCase();
     const matchesSearchQuery =
@@ -63,7 +55,15 @@ const EmployeesList: React.FC = () => {
       workerGroupsByYear[year].push(worker);
     }
   }
-
+  
+  if (loading) {
+    return <Skeleton />;
+  }
+  
+  if (error) {
+    return <ErrorPage />;
+  }
+  
   if (!filteredWorkers.length) {
     return <NotFoundBlock />;
   }
