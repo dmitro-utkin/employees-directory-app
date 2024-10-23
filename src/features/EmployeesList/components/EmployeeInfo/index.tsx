@@ -2,8 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../../common/state/store';
+import moment from 'moment';
 import CallButtons from '../EmployeeInfo/components/CallButton';
-// import NotFoundBlock from '../../../Errors/NotFoundBlock';
 import { getAge } from '../../../../common/utils';
 import {
   StyledLoader,
@@ -31,10 +31,6 @@ const EmployeeInfo: React.FC = React.memo(() => {
     setShowCallButtons(true);
   }, []);
 
-  const handleBackClick = () => {
-    navigate('/');
-  };
-
   if (loading) {
     return <StyledLoader>Loading...</StyledLoader>;
   }
@@ -58,17 +54,11 @@ const EmployeeInfo: React.FC = React.memo(() => {
     );
   }
 
-  const formattedBirthDate = new Date(worker.birthDate).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-
   return (
     <>
       <section className={`employee-info ${showCallButtons ? 'blur-page' : ''}`}>
         <div className="employee-info__header">
-          <button className="employee-info__close-btn" onClick={handleBackClick}>
+          <button className="employee-info__close-btn" onClick={() => navigate('/')}>
             <img src="/images/left_arrow_icon.png" alt="left arrow" />
           </button>
           <img className="employee-info__avatar" src={worker.avatar} alt="avatar" />
@@ -85,7 +75,7 @@ const EmployeeInfo: React.FC = React.memo(() => {
             <div className="employee-info__star">
               <img src="/images/star_icon.png" alt="star" />
             </div>
-            {formattedBirthDate}
+            {moment(worker.birthDate).format('DD MMMM YYYY')}
             <span className="employee-info__age">{getAge(worker.birthDate)} years</span>
           </div>
         </div>
