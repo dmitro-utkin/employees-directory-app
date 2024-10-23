@@ -1,3 +1,5 @@
+@import '../../../../../../common/scss/variables.scss';
+
 .call-buttons {
   position: absolute;
   z-index: 21;
@@ -19,14 +21,14 @@
 
   &__phone-number {
     margin-bottom: 8px;
-    background-color: #f5f5f5b2;
+    background-color: $GreyForButtonNumber;
 
     &:hover {
-      background-color: #fff;
+      background-color: $White;
     }
   }
 
   &__cancel-btn {
-    background-color: #fff;
+    background-color: $White;
   }
 }

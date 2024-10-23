@@ -1,10 +1,11 @@
 @import './../../common/scss/breakpoint.scss';
+@import './../../common/scss/variables.scss';
 
 .filter-block {
   height: 96px;
   margin-top: 46px;
   min-width: 375px;
-  background-color: #ffffff;
+  background-color: $White;
   display: block;
 
   @include for-large-up {

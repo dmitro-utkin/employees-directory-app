@@ -20,9 +20,6 @@ export const StyledError = styled.div`
   height: 108px;
   background-color: red;
   opacity: 1;
-  transform: none;
-  transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px,
     rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
 `;

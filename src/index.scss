@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
+@import './common/scss/variables.scss';
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #fff;
+  background-color: $White;
   margin: 0 auto;
   color: #050510;
   font-family: 'Inter', sans-serif;
@@ -18,7 +18,7 @@ body {
   min-width: 375px;
   min-height: 100vh;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: $White;
 }
 
 .container {
@@ -26,7 +26,7 @@ body {
   max-width: 1280px;
   min-width: 375px;
   min-height: 100vh;
-  background-color: #fff;
+  background-color: $White;
 }
 
 a {

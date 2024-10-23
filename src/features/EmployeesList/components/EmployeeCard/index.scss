@@ -1,4 +1,5 @@
 @import './../../../../common/scss/breakpoint.scss';
+@import './../../../../common/scss/variables.scss';
 
 .employee {
   display: flex;
@@ -24,13 +25,13 @@
     margin: 24px 0;
     font-weight: 500;
     font-size: 16px;
-    color: #050510;
+    color: $TextAlmostBlack;
   }
 
   &__tag {
     font-size: 14px;
     line-height: 18px;
-    color: #97979b;
+    color: $TextGrey;
     margin-left: 4px;
   }
 
@@ -38,7 +39,7 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
-    color: #55555c;
+    color: $TextGraphite;
   }
 
   &__birth {
@@ -46,6 +47,6 @@
     right: 20px;
     font-size: 15px;
     line-height: 20px;
-    color: #55555c;
+    color: $TextGraphite;
   }
 }

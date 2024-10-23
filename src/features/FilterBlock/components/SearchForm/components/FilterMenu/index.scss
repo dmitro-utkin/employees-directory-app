@@ -1,4 +1,5 @@
 @import '../../../../../../common/scss/breakpoint.scss';
+@import '../../../../../../common/scss/variables.scss';
 
 .overlay {
   position: fixed;
@@ -7,7 +8,7 @@
   z-index: 9;
   width: 100%;
   height: 100%;
-  background-color: #0505105c;
+  background-color: $TransparentBlack;
 }
 
 .filter-container {
@@ -24,7 +25,7 @@
   width: 95%;
   height: 220px;
   border-radius: 20px 20px 0 0;
-  background-color: #fff;
+  background-color: $White;
   transform: translateY(100%);
   transition: transform 0.3s ease;
   will-change: transform;
@@ -56,7 +57,7 @@
     width: 56px;
     height: 4px;
     margin: 12px 0 12px 0;
-    background-color: #c3c3c6;
+    background-color: $LightGrey;
     border: none;
     outline: none;
     cursor: pointer;
@@ -73,7 +74,7 @@
       margin: 0;
       padding: 0;
       border-radius: 50%;
-      background-color: #f7f7f8;
+      background-color: $VeryLightGray;
     }
   }
 
@@ -84,7 +85,7 @@
       display: block;
       width: 20px;
       height: 20px;
-      color: #c3c3c6;
+      color: $LightGrey;
       transform: rotate(45deg);
     }
   }
@@ -94,7 +95,7 @@
     font-size: 20px;
     line-height: 24px;
     font-weight: 600;
-    color: #050510;
+    color: $TextAlmostBlack;
 
     @include for-large-up {
       margin-top: 24px;
@@ -118,15 +119,15 @@
     height: 20px;
     padding: 0;
     margin-right: 20px;
-    background-color: #fff;
+    background-color: $White;
     border-radius: 100%;
-    border: 2px solid #6534ff;
+    border: 2px solid $Violet;
     outline: 0;
     cursor: pointer;
   }
 
   &__btn_active {
-    border: 6px solid #6534ff;
+    border: 6px solid $Violet;
   }
 
   &__text {
@@ -134,7 +135,7 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
-    color: #050510;
+    color: $TextAlmostBlack;
   }
 }
 

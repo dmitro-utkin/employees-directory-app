@@ -1,7 +1,9 @@
+@import '../../../../common/scss/variables.scss';
+
 .navigation {
   width: 100%;
   font-size: 15px;
-  border-bottom: 0.33px solid #c3c3c6;
+  border-bottom: 0.33px solid $LightGrey;
 
   &__list {
     height: 36px;
@@ -12,7 +14,7 @@
     justify-content: space-between;
     overflow-x: auto;
     list-style: none;
-    color: #97979B;
+    color: $TextGrey;
 
     &::-webkit-scrollbar {
       height: 0;
@@ -26,12 +28,12 @@
 
     &_active {
       color: #050510;
-      border-bottom: 2px solid #6534FF;
+      border-bottom: 2px solid $Violet;
     }
 
     &:hover {
       color: #050510;
-      border-bottom: 2px solid #6534FF;
+      border-bottom: 2px solid $Violet;
     }
   }
 }

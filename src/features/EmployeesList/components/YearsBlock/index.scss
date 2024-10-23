@@ -1,4 +1,5 @@
 @import '../../../../common/scss/breakpoint.scss';
+@import '../../../../common/scss/variables.scss';
 
 .years-block {
   display: flex;
@@ -7,12 +8,12 @@
   align-items: center;
   width: 100%;
   margin: 22px 0;
-  color: #c3c3c6;
+  color: $LightGrey;
 
   &__line {
     width: 72px;
     height: 1px;
-    background-color: #c3c3c6;
+    background-color: $LightGrey;
 
     &_left {
       margin-left: 8px;

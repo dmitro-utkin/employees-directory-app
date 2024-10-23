@@ -1,3 +1,5 @@
+@import '../../../common/scss/variables.scss';
+
 .errorPage {
   display: flex;
   flex-direction: column;
@@ -16,14 +18,14 @@
     font-weight: 600;
     font-size: 17px;
     line-height: 22px;
-    color: #050510;
+    color: $TextAlmostBlack;
   }
 
   &__description {
     margin: 0 0 12px 0;
     font-size: 16px;
     line-height: 20px;
-    color: #97979b;
+    color: $TextGrey;
   }
 
   &__link {
@@ -31,6 +33,6 @@
     font-size: 16px;
     line-height: 20px;
     text-decoration: none;
-    color: #6534ff;
+    color: $Violet;
   }
 }
