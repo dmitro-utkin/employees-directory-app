@@ -8,6 +8,7 @@ import NotFoundBlock from '../Errors/NotFoundBlock';
 import ErrorPage from '../Errors/ErrorPage';
 import Skeleton from './components/Skeleton';
 import { RootState } from '../../common/state/store';
+import moment from 'moment';
 
 import './index.scss';
 
@@ -45,25 +46,25 @@ const EmployeesList: React.FC = () => {
     return 0;
   });
 
-  const workerGroupsByYear: { [key: number]: WorkerData[] } = {};
-  if (activeFilter === 'birthday') {
-    for (const worker of sortedWorkers) {
-      const year = new Date(worker.birthDate).getFullYear();
-      if (!workerGroupsByYear[year]) {
-        workerGroupsByYear[year] = [];
-      }
-      workerGroupsByYear[year].push(worker);
+  const workerGroupsByYear: { year: number; workers: WorkerData[]; }[] = [];
+  sortedWorkers.forEach((worker) => {
+    const year = moment(worker.birthDate).year();
+    const existingYearGroup = workerGroupsByYear.find((group) => group.year === year);
+    if (existingYearGroup) {
+      existingYearGroup.workers.push(worker);
+    } else {
+      workerGroupsByYear.push({ year, workers: [worker] });
     }
-  }
-  
+  });
+
   if (loading) {
     return <Skeleton />;
   }
-  
+
   if (error) {
     return <ErrorPage />;
   }
-  
+
   if (!filteredWorkers.length) {
     return <NotFoundBlock />;
   }
@@ -75,25 +76,22 @@ const EmployeesList: React.FC = () => {
   return (
     <ul className="employees-list">
       {activeFilter === 'birthday' &&
-        Object.keys(workerGroupsByYear).map(yearString => {
-          const year = Number(yearString);
-          return (
-            <React.Fragment key={year}>
-              <YearsBlock year={year} />
-              {workerGroupsByYear[year].map((worker: WorkerData) => (
-                <Link key={worker.id} to={`/employee/${worker.id}`}>
-                  <EmployeeCard
-                    employee={worker}
-                    showBirthDate={true}
-                    onClick={() => handleWorkerClick(worker.id)}
-                  />
-                </Link>
-              ))}
-            </React.Fragment>
-          );
-        })}
+        workerGroupsByYear.map((yearGroup) => (
+          <React.Fragment key={yearGroup.year}>
+            <YearsBlock year={yearGroup.year} />
+            {yearGroup.workers.map((worker) => (
+              <Link className='employees-list__link' key={worker.id} to={`/employee/${worker.id}`}>
+                <EmployeeCard
+                  employee={worker}
+                  showBirthDate={true}
+                  onClick={() => handleWorkerClick(worker.id)}
+                />
+              </Link>
+            ))}
+          </React.Fragment>
+        ))}
       {activeFilter === 'alphabet' &&
-        sortedWorkers.map((worker: WorkerData) => (
+        sortedWorkers.map((worker) => (
           <Link key={worker.id} to={`/employee/${worker.id}`}>
             <EmployeeCard
               employee={worker}
