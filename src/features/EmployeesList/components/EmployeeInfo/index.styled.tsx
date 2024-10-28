@@ -18,7 +18,7 @@ export const StyledError = styled.div`
   align-items: flex-start;
   gap: 14px;
   height: 108px;
-  background-color: red;
+  background-color: #f44336;
   opacity: 1;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px,
     rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
@@ -42,7 +42,7 @@ export const StyledErrorLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 14px;
   text-decoration: none;
   color: #6534ff;
 `;
