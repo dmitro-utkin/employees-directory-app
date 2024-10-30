@@ -1,4 +1,4 @@
-@import '../../../../common/scss/variables.scss';
+@use '../../../../common/scss/variables.scss' as *;
 
 .search-form {
   height: 52px;

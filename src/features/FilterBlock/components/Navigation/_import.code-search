@@ -1,0 +1,38 @@
+# Query: @import
+
+15 results - 10 files
+
+src\index.scss:
+  2: @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+src\features\EmployeesList\index.scss:
+  1: @use './../../common/scss/breakpoint.scss';
+  2: @use './../../common/scss/variables.scss';
+
+src\features\EmployeesList\components\EmployeeCard\index.scss:
+  1: @use './../../../../common/scss/breakpoint.scss';
+  2: @use './../../../../common/scss/variables.scss';
+
+src\features\EmployeesList\components\YearsBlock\index.scss:
+  1: @use '../../../../common/scss/breakpoint.scss';
+  2: @use '../../../../common/scss/variables.scss';
+
+src\features\Errors\ErrorPage\index.scss:
+  1: @use '../../../common/scss/variables.scss';
+
+src\features\Errors\NotFoundBlock\index.scss:
+  1: @use '../../../common/scss/variables.scss';
+
+src\features\FilterBlock\index.scss:
+  1: @use './../../common/scss/breakpoint.scss';
+  2: @use './../../common/scss/variables.scss';
+
+src\features\FilterBlock\components\Navigation\index.scss:
+  1: @use '../../../../common/scss/variables.scss';
+
+src\features\FilterBlock\components\SearchForm\index.scss:
+  1: @use '../../../../common/scss/variables.scss';
+
+src\features\FilterBlock\components\SearchForm\components\FilterMenu\index.scss:
+  1: @use '../../../../../../common/scss/breakpoint.scss';
+  2: @use '../../../../../../common/scss/variables.scss';

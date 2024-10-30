@@ -7,42 +7,31 @@ import './index.scss';
 
 const FilterBlock: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isFilterMenuVisible, setIsFilterMenuVisible] = useState<boolean>(false);
+  const [isFilterMenuVisible, setIsFilterMenuVisible] = useState(false);
 
-  const sortBy = searchParams.get('sortBy');
-  const activeFilter = (sortBy === 'alphabet' || sortBy === 'birthday') ? sortBy : 'alphabet';
-  const searchQuery = searchParams.get('searchText') ?? '';
-
-  const updateParams = (key: string, value: string) => {
+  const updateParams = (key: string, value: string) =>
     setSearchParams({ ...Object.fromEntries(searchParams), [key]: value });
-  };
 
-  const handleToggleFilterMenu = () => {
-    setIsFilterMenuVisible(prevState => !prevState);
-  };
+  const toggleFilterMenu = () => setIsFilterMenuVisible(prevState => !prevState);
 
-  const handleSearch = (query: string) => {
-    updateParams('searchText', query);
-  };
-
-  const handleFilterChange = (filter: 'alphabet' | 'birthday') => {
+  const handleFilterChange = (filter: 'alphabet' | 'birthday') =>
     updateParams('sortBy', filter);
-  };
 
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = (category: string) =>
     updateParams('position', category);
-  };
+
+  const activeFilter = searchParams.get('sortBy') || 'alphabet';
 
   return (
     <div className="filter-block">
       <h1 className="filter-block__title">Search</h1>
       <SearchForm
-        onToggleFilterMenu={handleToggleFilterMenu}
+        onToggleFilterMenu={toggleFilterMenu}
         isFilterMenuVisible={isFilterMenuVisible}
       />
       {isFilterMenuVisible && (
         <FilterMenu
-          onClose={handleToggleFilterMenu}
+          onClose={toggleFilterMenu}
           isFilterMenuVisible={isFilterMenuVisible}
           onFilterChange={handleFilterChange}
           activeFilter={activeFilter}
