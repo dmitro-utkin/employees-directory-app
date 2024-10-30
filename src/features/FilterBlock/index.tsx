@@ -39,8 +39,6 @@ const FilterBlock: React.FC = () => {
       <SearchForm
         onToggleFilterMenu={handleToggleFilterMenu}
         isFilterMenuVisible={isFilterMenuVisible}
-        onSearch={handleSearch}
-        searchQuery={searchQuery}
       />
       {isFilterMenuVisible && (
         <FilterMenu

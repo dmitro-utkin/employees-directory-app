@@ -1,6 +1,9 @@
 import React from 'react';
-import { YearsBlockProps } from '../../../../common/types';
 import './index.scss';
+
+export type YearsBlockProps = {
+  year: number;
+};
 
 const YearsBlock: React.FC<YearsBlockProps> = ({ year }) => (
   <div className="years-block">

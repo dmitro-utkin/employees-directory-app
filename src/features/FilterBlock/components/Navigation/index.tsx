@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { NavigationProps } from '../../../../common/types';
 import './index.scss';
+
+export type NavigationProps = {
+  setSelectedCategory: (category: string) => void;
+};
 
 const categories = ['All', 'Designer', 'Analyst', 'Manager', 'iOS', 'Android'];
 

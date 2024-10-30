@@ -1,7 +1,21 @@
 import React from 'react';
-import { EmployeeCardProps } from '../../../../common/types';
 import './index.scss';
 import moment from 'moment';
+
+type EmployeeCardProps = {
+  employee: {
+    id: string;
+    avatar: string;
+    name: string;
+    tag: string;
+    position: string;
+    birthDate: string;
+    phone: string;
+    email: string;
+  };
+  showBirthDate: boolean;
+  onClick: () => void;
+};
 
 const EmployeeCard: React.FC<EmployeeCardProps> = ({
   employee: { id, birthDate, avatar, name, tag, position },

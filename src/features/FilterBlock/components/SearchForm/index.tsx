@@ -1,28 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { SearchFormProps } from '../../../../common/types';
+import { useSearchParams } from 'react-router-dom';
 import './index.scss';
+
+type SearchFormProps = {
+  onToggleFilterMenu: () => void;
+  isFilterMenuVisible: boolean;
+};
 
 const SearchForm: React.FC<SearchFormProps> = ({
   onToggleFilterMenu,
   isFilterMenuVisible,
-  onSearch,
-  searchQuery,
 }) => {
-  const [searchText, setSearchText] = useState<string>(searchQuery);
+  const [searchText, setSearchText] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setSearchText(searchQuery);
-  }, [searchQuery]);
+    const query = searchParams.get('searchText');
+    if (query) {
+      setSearchText(query);
+    }
+  }, [searchParams]);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearchText(query);
-    onSearch(query);
+  const handleInputChange = (value: string) => {
+    setSearchParams(prevParams => {
+      const params = new URLSearchParams(prevParams);
+      value ? params.set('searchText', value) : params.delete('searchText');
+      return params;
+    });
+    setSearchText(value);
   };
 
   const handleCancel = () => {
     setSearchText('');
-    onSearch('');
+    setSearchParams(prevParams => {
+      const params = new URLSearchParams(prevParams);
+      params.delete('searchText');
+      return params;
+    });
   };
 
   return (
@@ -34,7 +48,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
           type="text"
           placeholder="Enter name, tag, email..."
           value={searchText}
-          onChange={handleInputChange}
+          onChange={e => handleInputChange(e.target.value)}
         />
         <button
           className={`search-form__button ${isFilterMenuVisible ? 'active' : ''}`}
@@ -48,7 +62,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
           />
         </button>
       </form>
-      {searchQuery && (
+      {searchText && (
         <button className="search-form__cancel-btn" onClick={handleCancel}>
           Cancel
         </button>

@@ -1,23 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchWorkers } from '../gateway.ts/gateway';
-export interface WorkerData {
-    id: string;
-    avatar: string;
-    name: string;
-    tag: string;
-    position: string;
-    birthDate: string;
-    phone: string;
-    email: string;
-}
+import { Employee } from '../types';
 
-interface WorkersState {
-    workers: WorkerData[];
+
+type EmployeesState = {
+    workers: Employee[];
     loading: boolean;
     error: string | null;
 }
 
-const initialState: WorkersState = {
+const initialState: EmployeesState = {
     workers: [],
     loading: false,
     error: null,
@@ -27,7 +19,7 @@ const workersSlice = createSlice({
     name: 'workers',
     initialState,
     reducers: {
-        setWorkers: (state, action: PayloadAction<WorkerData[]>) => {
+        setWorkers: (state, action: PayloadAction<Employee[]>) => {
             state.workers = action.payload;
         },
     },
@@ -37,7 +29,7 @@ const workersSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(fetchWorkers.fulfilled, (state, action: PayloadAction<WorkerData[]>) => {
+            .addCase(fetchWorkers.fulfilled, (state, action: PayloadAction<Employee[]>) => {
                 state.loading = false;
                 state.workers = action.payload || state.workers;
             })

@@ -1,7 +1,12 @@
 import React from 'react';
-import { FilterMenuProps } from '../../../../../../common/types';
 import './index.scss';
 
+export type FilterMenuProps = {
+  onClose: () => void;
+  isFilterMenuVisible: boolean;
+  onFilterChange: (filter: 'alphabet' | 'birthday') => void;
+  activeFilter: 'alphabet' | 'birthday';
+};
 
 const FilterMenu: React.FC<FilterMenuProps> = ({
   onClose,
