@@ -1,5 +1,5 @@
 import React from 'react';
-import { CallOnNumberProps } from '../../../../../../common/types';
+import { CallOnNumberProps } from '../../../../common/types';
 import './index.scss';
 
 const CallButtons: React.FC<CallOnNumberProps> = ({ phoneNumber, cancel }) => {

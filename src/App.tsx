@@ -5,7 +5,7 @@ import { AppDispatch } from './common/state/store';
 import { fetchWorkers } from './common/gateway.ts/gateway';
 import FilterBlock from './features/FilterBlock';
 import EmployeesList from './features/EmployeesList';
-import EmployeeInfo from './features/EmployeesList/components/EmployeeInfo';
+import EmployeeInfo from './features/EmployeeInfo';
 import ErrorPage from './features/Errors/ErrorPage';
 import './index.scss';
 

@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { RootState } from '../../../../common/state/store';
+import { RootState } from '../../common/state/store';
 import moment from 'moment';
 import CallButtons from '../EmployeeInfo/components/CallButton';
-import { getAge } from '../../../../common/utils';
+import { getAge } from '../../common/utils';
 import {
   StyledLoader,
   StyledError,

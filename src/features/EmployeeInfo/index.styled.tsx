@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import NotFoundBlock from '../../../Errors/NotFoundBlock';
+import NotFoundBlock from '../../../src/features/Errors/NotFoundBlock';
 
 export const StyledLoader = styled.div`
   position: relative;
