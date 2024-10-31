@@ -1,6 +1,6 @@
-@use '../../../common/scss/variables.scss' as *;
+@use '../../common/scss/variables.scss' as *;
 
-.errorPage {
+.error {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,5 +34,8 @@
     line-height: 20px;
     text-decoration: none;
     color: $Violet;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 }

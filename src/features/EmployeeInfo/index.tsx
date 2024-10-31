@@ -3,18 +3,13 @@ import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '../../common/state/store';
 import moment from 'moment';
+import Error from '../Errors';
 import CallButtons from '../EmployeeInfo/components/CallButton';
+import Loading from './components/Loading';
+import AttentionBlock from './components/AttentionBlock';
 import { getAge } from '../../common/utils';
-import {
-  StyledLoader,
-  StyledError,
-  StyledErrorHeader,
-  StyledErrorText,
-  StyledErrorLink,
-  StyledNotFoundBlock,
-} from './index.styled';
-import './index.scss';
 
+import './index.scss';
 
 const EmployeeInfo: React.FC = React.memo(() => {
   const [showCallButtons, setShowCallButtons] = useState(false);
@@ -23,7 +18,6 @@ const EmployeeInfo: React.FC = React.memo(() => {
 
   const workers = useSelector((state: RootState) => state.workers.workers);
   const loading = useSelector((state: RootState) => state.workers.loading);
-  const error = useSelector((state: RootState) => state.workers.error);
 
   const worker = workers.find(worker => worker.id === String(employeeId));
 
@@ -32,24 +26,14 @@ const EmployeeInfo: React.FC = React.memo(() => {
   }, []);
 
   if (loading) {
-    return <StyledLoader>Loading...</StyledLoader>;
-  }
-
-  if (error) {
-    return <div>Error loading employee: {error}</div>;
+    return <Loading loading={false} />;
   }
 
   if (!worker) {
     return (
       <>
-        <StyledError>
-          <StyledErrorHeader>Employee not found</StyledErrorHeader>
-          <StyledErrorText>
-            I can't get the employee's details. Check the ID instructions.
-          </StyledErrorText>
-        </StyledError>
-        <StyledNotFoundBlock />
-        <StyledErrorLink to="/">Back to list</StyledErrorLink>
+        <AttentionBlock />
+        <Error type="employeeSearch" />
       </>
     );
   }

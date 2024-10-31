@@ -1,11 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useSearchParams, Link } from 'react-router-dom';
-import { WorkerData } from '../../common/state/workersSlice';
+import { Employee } from '../../common/types';
 import EmployeeCard from './components/EmployeeCard';
 import YearsBlock from './components/YearsBlock';
-import NotFoundBlock from '../Errors/NotFoundBlock';
-import ErrorPage from '../Errors/ErrorPage';
+import Error from '../Errors';
 import Skeleton from './components/Skeleton';
 import { RootState } from '../../common/state/store';
 import moment from 'moment';
@@ -46,7 +45,7 @@ const EmployeesList: React.FC = () => {
     return 0;
   });
 
-  const workerGroupsByYear: { year: number; workers: WorkerData[]; }[] = [];
+  const workerGroupsByYear: { year: number; workers: Employee[]; }[] = [];
   sortedWorkers.forEach((worker) => {
     const year = moment(worker.birthDate).year();
     const existingYearGroup = workerGroupsByYear.find((group) => group.year === year);
@@ -62,11 +61,11 @@ const EmployeesList: React.FC = () => {
   }
 
   if (error) {
-    return <ErrorPage />;
+    return <Error type="general" />;
   }
 
   if (!filteredWorkers.length) {
-    return <NotFoundBlock />;
+    return <Error type="employeesSearch" />;
   }
 
   const handleWorkerClick = (workerId: string) => {

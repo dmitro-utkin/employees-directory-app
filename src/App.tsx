@@ -6,7 +6,7 @@ import { fetchWorkers } from './common/gateway.ts/gateway';
 import FilterBlock from './features/FilterBlock';
 import EmployeesList from './features/EmployeesList';
 import EmployeeInfo from './features/EmployeeInfo';
-import ErrorPage from './features/Errors/ErrorPage';
+import Error from './features/Errors';
 import './index.scss';
 
 const router = createBrowserRouter([
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <ErrorPage />,
+    element: <Error type="general" />,
   },
 ]);
 

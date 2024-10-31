@@ -1,0 +1,43 @@
+@use './../../../../common/scss/breakpoint.scss' as *;
+@use './../../../../common/scss/variables.scss' as *;
+
+.attention {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 16px;
+  position: absolute;
+  bottom: 150px;
+  min-height: 64px;
+  min-width: 343px;
+  background-color: #F44336;
+  border-radius: 12px;
+  flex-direction: column;
+  opacity: 1;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
+
+  @include for-large-up {
+    width: 100%;
+    height: 106px;
+    top: -125px;
+    border-radius: 0;
+    gap: 14px
+  }
+
+  &__text {
+    width: 255px;
+    padding: 0 16px;
+    color: $White;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+
+    @include for-large-up {
+      padding: 0 24px;
+      font-size: 13px;
+      line-height: 18px;
+    }
+  }
+}
