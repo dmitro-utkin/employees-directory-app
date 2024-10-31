@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import './index.scss';
 
 export type NavigationProps = {
@@ -8,17 +9,15 @@ export type NavigationProps = {
 const categories = ['All', 'Designer', 'Analyst', 'Manager', 'iOS', 'Android'];
 
 const Navigation: React.FC<NavigationProps> = ({ setSelectedCategory }) => {
-  const [activeCategory, setActiveCategory] = useState<string>(() => {
-    return localStorage.getItem('activeCategory') ?? 'All';
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    localStorage.setItem('activeCategory', activeCategory);
-  }, [activeCategory]);
+  const activeCategory = searchParams.get('position') ?? 'All';
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
-    setActiveCategory(category);
+    setSearchParams({ position: category });
+    navigate(`?position=${category}`);
   };
 
   return (
