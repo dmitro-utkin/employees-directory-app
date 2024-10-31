@@ -14,27 +14,22 @@ const FilterBlock: React.FC = () => {
 
   const toggleFilterMenu = () => setIsFilterMenuVisible(prevState => !prevState);
 
-  const handleFilterChange = (filter: 'alphabet' | 'birthday') =>
-    updateParams('sortBy', filter);
+  const handleFilterChange = (filter: 'alphabet' | 'birthday') => updateParams('sortBy', filter);
 
-  const handleCategoryChange = (category: string) =>
-    updateParams('position', category);
+  const handleCategoryChange = (category: string) => updateParams('position', category);
 
-  const activeFilter = searchParams.get('sortBy') || 'alphabet';
+  const activeFilter = searchParams.get('sortBy') ?? 'alphabet';
 
   return (
     <div className="filter-block">
       <h1 className="filter-block__title">Search</h1>
-      <SearchForm
-        onToggleFilterMenu={toggleFilterMenu}
-        isFilterMenuVisible={isFilterMenuVisible}
-      />
+      <SearchForm onToggleFilterMenu={toggleFilterMenu} isFilterMenuVisible={isFilterMenuVisible} />
       {isFilterMenuVisible && (
         <FilterMenu
           onClose={toggleFilterMenu}
           isFilterMenuVisible={isFilterMenuVisible}
           onFilterChange={handleFilterChange}
-          activeFilter={activeFilter}
+          activeFilter={activeFilter as 'alphabet' | 'birthday'}
         />
       )}
       <Navigation setSelectedCategory={handleCategoryChange} />
