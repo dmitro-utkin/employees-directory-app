@@ -1,6 +1,6 @@
 import React from 'react';
-import { Employee } from '../../../../common/types';
 import moment from 'moment';
+import { Employee } from '../../../../common/types';
 
 import './index.scss';
 
