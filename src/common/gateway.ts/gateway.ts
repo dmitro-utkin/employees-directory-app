@@ -10,7 +10,7 @@ export const fetchWorkers = createAsyncThunk('workers/fetchWorkers', async (_, t
       throw new Error(`Failed to fetch workers: ${errorText}`);
     }
     return await response.json();
-  } catch (error: unknown) {
+  } catch (error: Error | any) {
     if (error instanceof Error) {
       return thunkAPI.rejectWithValue(error.message);
     }
