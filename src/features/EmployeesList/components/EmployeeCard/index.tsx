@@ -1,18 +1,11 @@
 import React from 'react';
-import './index.scss';
+import { Employee } from '../../../../common/types';
 import moment from 'moment';
 
+import './index.scss';
+
 type EmployeeCardProps = {
-  employee: {
-    id: string;
-    avatar: string;
-    name: string;
-    tag: string;
-    position: string;
-    birthDate: string;
-    phone: string;
-    email: string;
-  };
+  employee: Employee;
   showBirthDate: boolean;
   onClick: () => void;
 };
