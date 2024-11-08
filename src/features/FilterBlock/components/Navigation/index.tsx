@@ -16,8 +16,20 @@ const Navigation: React.FC<NavigationProps> = ({ setSelectedCategory }) => {
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
-    setSearchParams({ position: category });
-    navigate(`?position=${category}`);
+
+    const currentParams = Object.fromEntries(searchParams.entries());
+
+    setSearchParams({ 
+      ...currentParams,
+      position: category 
+    });
+
+    const queryParams = new URLSearchParams({ 
+      ...currentParams,
+      position: category 
+    }).toString();
+
+    navigate(`?${queryParams}`);
   };
 
   return (
